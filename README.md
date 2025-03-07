@@ -59,8 +59,8 @@ This project demonstrates how to run an MQTT client on an STM32 board (**B‑L47
 4. Call `MQTTConnect()`.
 
 #### Subscription and Publishing
-- Once connected, subscribe to the topic `test/topic` via `MQTTSubscribe()`.  
-- Implement a periodic publishing task that sends a message every second on the `test/topic` topic.  
+- Once connected, subscribe to the topic `sensor/data` via `MQTTSubscribe()`.  
+- Implement a periodic publishing task that sends a message every second on the `sensor/data` topic.  
   - If using FreeRTOS, this can be done in a dedicated task with `osDelay(1000)`.  
   - Otherwise, use a loop in `main()` with `HAL_Delay(1000)`.
 
@@ -69,7 +69,7 @@ This project demonstrates how to run an MQTT client on an STM32 board (**B‑L47
 ### Command‑Line Tools
 - To confirm that the Mosquitto broker is running and reachable, we used `mosquitto_sub`:
 ```bash
-mosquitto_sub -h test.mosquitto.org -p 1883 -t "test"
+mosquitto_sub -h test.mosquitto.org -p 1883 -t "sensor/data"
 ```
 - This command shows any messages published on the test topic by the board.
 
@@ -121,7 +121,7 @@ sudo apt-get install mosquitto-clients
 4. Change the `MQTT_BROKER_HOST` in `main.c` to your **Public IPv4 DNS** of the EC2 instance.
 - On your EC2 instance, subscribe to the topic with:
 ```bash
-mosquitto_sub -h <MQTT_BROKER_HOST> -p 1883 -t "test/topic"
+mosquitto_sub -h <MQTT_BROKER_HOST> -p 1883 -t "sensor/data"
 ```
 (If you want to run the broker on a port other than 1883, adjust the above commands and your security group rules accordingly.)
 

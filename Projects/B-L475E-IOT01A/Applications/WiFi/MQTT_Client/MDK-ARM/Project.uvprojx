@@ -340,7 +340,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32L475xx,USE_STM32L475_DISCOVERY</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L4xx/Include;../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/B-L475E-IOT01;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTClient-C\src;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTPacket\src;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTPacket\src\FreeRTOS;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\Tasking\ARM_CM4F</IncludePath>
+              <IncludePath>../Inc;../../Common/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L4xx/Include;../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTClient-C\src;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTPacket\src;..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTPacket\src\FreeRTOS;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\Tasking\ARM_CM4F;..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01;..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\Components\hts221;..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\Components\lps22hb;..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\Components\lis3mdl;..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\Components\lsm6dsl</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -381,26 +381,6 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
-        <Group>
-          <GroupName>Drivers/BSP/B-L475E-IOT01</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32l475e_iot01.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l475e_iot01_tsensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_tsensor.c</FilePath>
-            </File>
-            <File>
-              <FileName>hts221.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\hts221\hts221.c</FilePath>
-            </File>
-          </Files>
-        </Group>
         <Group>
           <GroupName>Drivers/STM32L4xx_HAL_Driver</GroupName>
           <Files>
@@ -613,6 +593,86 @@
               <FileName>MQTTUnsubscribeServer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\MQTT\MQTTPacket\src\MQTTUnsubscribeServer.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/B-L475E-IOT01</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32l475e_iot01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_accelero.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_accelero.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_gyro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_gyro.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_hsensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_hsensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_magneto.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_magneto.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_psensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_psensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l475e_iot01_tsensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\B-L475E-IOT01\stm32l475e_iot01_tsensor.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/B-L475E-IOT01/hts221</GroupName>
+          <Files>
+            <File>
+              <FileName>hts221.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\hts221\hts221.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/B-L475E-IOT01/lps22hb</GroupName>
+          <Files>
+            <File>
+              <FileName>lps22hb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\lps22hb\lps22hb.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/B-L475E-IOT01/lis3mdl</GroupName>
+          <Files>
+            <File>
+              <FileName>lis3mdl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\lis3mdl\lis3mdl.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/BSP/B-L475E-IOT01/lsm6dsl</GroupName>
+          <Files>
+            <File>
+              <FileName>lsm6dsl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\lsm6dsl\lsm6dsl.c</FilePath>
             </File>
           </Files>
         </Group>

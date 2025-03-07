@@ -21,8 +21,9 @@
 #include "MQTTClient.h"      // Paho Embedded MQTT Client
 
 /* Private defines -----------------------------------------------------------*/
-#define SSID                "YOUR_WIFI_SSID"
-#define PASSWORD            "YOUR_WIFI_PASSWORD"
+#define SSID                "andrew"
+#define PASSWORD            "jh010923!"
+
 
 /* Mosquitto broker settings */
 #define MQTT_BROKER_HOST    "test.mosquitto.org"
@@ -42,6 +43,8 @@
 #if defined (TERMINAL_USE)
 extern UART_HandleTypeDef hDiscoUart;
 #endif
+
+I2C_HandleTypeDef hi2c2;
 
 /* MQTT communication buffers */
 unsigned char mqtt_sendbuf[MQTT_BUFFER_SIZE];
@@ -136,6 +139,19 @@ static void SystemClock_Config(void)
     }
 }
 
+static void MX_I2C2_Init(void)
+{
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.Timing = 0x00100D14;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+}
+
 /*------------------------------------------------------------------------------
   main() - Entry point.
 ------------------------------------------------------------------------------*/
@@ -143,9 +159,18 @@ int main(void)
 {
     HAL_Init();
     SystemClock_Config();
+		MX_I2C2_Init();
     BSP_LED_Init(LED2);
-    BSP_TSENSOR_Init();
+		BSP_ACCELERO_Init();
+		BSP_GYRO_Init();
+		BSP_HSENSOR_Init();
+		BSP_MAGNETO_Init();
+		BSP_PSENSOR_Init();
+		BSP_TSENSOR_Init();
+		
+		HAL_Delay(1000);
 
+	
 #if defined (TERMINAL_USE)
     /* Initialize UART for debugging */
     hDiscoUart.Instance = DISCOVERY_COM1;
@@ -161,7 +186,7 @@ int main(void)
     BSP_COM_Init(COM1, &hDiscoUart);
     printf("****** MQTT Mosquitto Broker Demo ******\n\n");
 #endif
-
+		
     /* Connect to Wi-Fi */
     if (wifi_connect() != 0) {
         printf("Wi-Fi connection failed!\n");
@@ -211,15 +236,46 @@ int main(void)
 
     /* Main loop: process incoming MQTT messages and maintain the connection */
     while (1) {
+				int16_t accelData[3];
+				BSP_ACCELERO_AccGetXYZ(accelData);
+				
+				float gyroData[3];
+				BSP_GYRO_GetXYZ(gyroData);
+				
+				float humidity = BSP_HSENSOR_ReadHumidity();
+				
+				int16_t magnetoData[3];
+				BSP_MAGNETO_GetXYZ(magnetoData);
+			
+				float pressure = BSP_PSENSOR_ReadPressure();
+			
+				float temperature = BSP_TSENSOR_ReadTemp();
+
+				char payload[256];
+				snprintf(payload, sizeof(payload),
+								 "{"
+								 "\"temperature\":%.2f,"
+								 "\"humidity\":%.2f,"
+								 "\"pressure\":%.2f,"
+								 "\"magnetic_field\":{\"x\":%d,\"y\":%d,\"z\":%d},"
+								 "\"accelerometer\":{\"x\":%d,\"y\":%d,\"z\":%d},"
+								 "\"gyroscope\":{\"x\":%f,\"y\":%f,\"z\":%f}"
+								 "}",
+								 temperature, humidity, pressure,
+								 magnetoData[0], magnetoData[1], magnetoData[2],
+								 accelData[0], accelData[1], accelData[2],
+								 gyroData[0], gyroData[1], gyroData[2]);
+			
+				printf("Payload: %s\n", payload);
+				
 			  /* Publish a test message */
 				MQTTMessage message;
-				char payload[] = "Hello from STM32 connecting to Mosquitto!";
 				message.payload = payload;
 				message.payloadlen = strlen(payload);
 				message.qos = QOS0;
 				message.retained = 0;
 
-				rc = MQTTPublish(&client, "test/topic", &message);
+				rc = MQTTPublish(&client, "sensor/data", &message);
 				if (rc != MQTT_SUCCESS) {
 						printf("MQTT publish failed with return code %d\n", rc);
 				} else {
