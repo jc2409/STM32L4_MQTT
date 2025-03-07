@@ -69,7 +69,7 @@ This project demonstrates how to run an MQTT client on an STM32 board (**B‑L47
 ### Command‑Line Tools
 - To confirm that the Mosquitto broker is running and reachable, we used `mosquitto_sub`:
 ```bash
-mosquitto_sub -h test.mosquitto.org -p 1883 -t "test"
+mosquitto_sub -h test.mosquitto.org -p 1883 -t "test/topic"
 ```
 - This command shows any messages published on the test topic by the board.
 
