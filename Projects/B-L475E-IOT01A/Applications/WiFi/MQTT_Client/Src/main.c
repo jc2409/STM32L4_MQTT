@@ -21,8 +21,8 @@
 #include "MQTTClient.h"      // Paho Embedded MQTT Client
 
 /* Private defines -----------------------------------------------------------*/
-#define SSID                "andrew"
-#define PASSWORD            "jh010923!"
+#define SSID                "YOUR_WIFI_SSID"
+#define PASSWORD            "YOUR_WIFI_PASSWORD"
 
 
 /* Mosquitto broker settings */
