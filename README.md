@@ -1,4 +1,4 @@
-﻿# STM32L4 MQTT Client 
+# STM32L4 MQTT Client 
 
 ## Overview
 This project demonstrates how to run an MQTT client on an STM32 board (**B‑L475E‑IOT01A1**) using the **ES‑WiFi** module. The goal was to connect to a public Mosquitto MQTT broker, subscribe to a topic, and publish messages periodically. To achieve this, the **Eclipse Paho Embedded MQTT Client** library was integrated with ST board’s Wi‑Fi interface.
