@@ -88,7 +88,7 @@ cd /etc/mosquitto/conf.d
 
 2. Edit (or create) `listener.conf`:
 ```bash
-nano listener.conf
+sudo nano listener.conf
 ```
 
 3. Add the following lines:
