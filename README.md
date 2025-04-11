@@ -97,6 +97,11 @@ listener 1883
 allow_anonymous true
 ```
 
+4. Restart Mosquitto:
+```bash
+sudo systemctl restart mosquitto
+```
+
 ### Modifications in `main.c`
 - Edit the **Wi‑Fi SSID** and **password**.
 - Change the **hostname** accordingly (if connecting to a different broker or cloud instance).
